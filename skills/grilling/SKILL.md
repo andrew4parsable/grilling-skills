@@ -32,6 +32,8 @@ The environment includes the user's GitHub org and Confluence. When the user's s
 - **GitHub:** use the `gh` CLI to search the user's org for code, issues, PRs, and READMEs.
 - **Confluence:** use an Atlassian MCP, if one is connected, to search the user's Confluence site.
 
+The opening search is the one exception to not blocking: hold the first round until it reports, and don't ask the user for anything it could settle, such as a link to a ticket or advisory.
+
 Take the org name and Confluence site from the user's `CLAUDE.md`. If they aren't there, ask for them as one question in the first round and run the searches before the second. If `gh` isn't authenticated or no Atlassian MCP is connected, say which source you're skipping and carry on.
 
 Open each round with a short **What I found** note: each finding with its source (repo and path, PR or issue number, page title and URL), and a plain statement when a search turned up nothing. Findings inform your recommended answers; they never settle a decision. Never paste credentials or secrets you come across into the session.
