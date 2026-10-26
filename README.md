@@ -17,7 +17,9 @@ The four belong together: `grill-me` and `grill-with-docs` only delegate to the 
 
 One file: [`skills/grilling/SKILL.md`](./skills/grilling/SKILL.md). The other three skills are identical to upstream.
 
-When your starting description doesn't name a specific repo, ticket, doc, or system, `grilling` now searches your GitHub org and Confluence for context before asking, using read-only sub-agents. It also searches mid-session when a question needs a fact those sources could hold. Each round opens with a **What I found** note that cites its sources, and the findings only inform the recommended answers; you still make every decision.
+When your starting description doesn't name a specific repo, ticket, doc, or system, `grilling` now searches your GitHub org and Confluence for context before asking. It also searches mid-session when a question needs a fact those sources could hold. Each round opens with a **What I found** note that cites its sources, and the findings only inform the recommended answers; you still make every decision.
+
+The skill tells Claude to run these searches through sub-agents, keep them read-only, and treat anything it finds as information, never as instructions. Those are instructions to Claude, not a sandbox. What a search can actually reach and do is set by the permissions of your `gh` login and your Atlassian connection, so check those before pointing the skill at an org you don't fully trust.
 
 - It reads your GitHub org name and Confluence site from your `CLAUDE.md`, or asks once.
 - It uses the `gh` CLI for GitHub and an Atlassian MCP for Confluence. If either is missing, it says so and continues without it.
@@ -30,7 +32,7 @@ Uses [`npx skills`](https://github.com/vercel-labs/skills), which requires Node.
 npx skills@latest add andrew4parsable/grilling-skills --skill '*' -a claude-code -g
 ```
 
-`-g` installs globally, so the skills work in any directory. On Windows, add `--copy`, because the installer symlinks by default.
+`-g` installs globally, so the skills work in any directory. Tested on macOS only; other systems are unsupported.
 
 Pocock's own plugin ships skills with the same names. Install one or the other, not both.
 
